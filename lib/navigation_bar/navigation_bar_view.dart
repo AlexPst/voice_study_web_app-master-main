@@ -34,7 +34,16 @@ class NavigationDesctopView extends StatelessWidget
         child: Row(
           children: [
             Spacer(),
-
+            for (var item in navigationItems)
+             NavigationBarItem(
+                  onPressed: (){
+                  scrollController.animateTo(
+                  item.position,
+                  duration: Duration(milliseconds: 700),
+                  curve: Curves.easeInOut,
+                  );
+                  }, text: item.text,
+             )
           ],
         ),
     );
@@ -53,12 +62,32 @@ class NavigationMobileView extends StatelessWidget
 
 
 class NavigationBarItem extends StatelessWidget{
+
+  NavigationBarItem({
+    Key? key,
+    required this.onPressed,
+    required this.text,
+    
+  }) : super(key: key);
+
+  final void Function() onPressed;
+  final String text;
+  
+
   @override
   Widget build(BuildContext context) {
     final isSmall = MediaQuery.of(context).size.width < 650;
-   return TextButton(
-    onPressed: onPressed, 
-    child: child)
+   return Padding(
+     padding: const EdgeInsets.only(right: 10),
+     child: TextButton(
+      style: TextButton.styleFrom(
+        primary: Colors.black,
+        
+      ),
+      onPressed:() {onPressed();}, 
+      child: Text(text, style: TextStyle(color: Colors.black, fontSize: isSmall ? 17 : 24),),
+      ),
+   );
   }
 
 }

@@ -29,7 +29,7 @@ class _HeaderBodyState extends State<HeaderBody> {
                   style: GoogleFonts.inter(textStyle: widget.isMobile ? Theme.of(context).textTheme.titleMedium : Theme.of(context).textTheme.displayLarge),
                   ),
           ),
-         AutoSizeText('Какой-то текст Какой-то текст Какой-то текст' ,
+         AutoSizeText('- Уроки эстрадного вокала' ,
         style: GoogleFonts.inter(textStyle: widget.isMobile ? Theme.of(context).textTheme.displayLarge : Theme.of(context).textTheme.displayMedium),
         ),
          SizedBox(height: widget.isMobile ? 20:40,),

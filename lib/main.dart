@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:voice_study_web_app/headerView/headerview.dart';
+import 'package:voice_study_web_app/navigation_bar/navigation_bar_view.dart';
+import 'package:provider/provider.dart';
+
+
 
 void main() {
   runApp(MainApp());
@@ -60,7 +64,7 @@ class _MainView extends State<MainView> with AfterLayoutMixin{
       
       setState(() {
         navigationItems = [
-          NavigationItem(text: 'Projects', key: projectKey),
+          NavigationItem(text: 'Проекты', key: projectKey),
           NavigationItem(text:'Навыки', key: skillKey),
           NavigationItem(text:'Опыт работы', key: experienceKey),
           NavigationItem(text: 'Блог', key: blogKey),
@@ -72,18 +76,30 @@ class _MainView extends State<MainView> with AfterLayoutMixin{
   @override
   Widget build(BuildContext context) {
      final width = MediaQuery.of(context).size.width;
-    return Scaffold(
+    return MultiProvider(providers:[
+        ProxyProvider0<List<NavigationItem>>(update: (_, __) {
+          return navigationItems;
+        }),
+        ChangeNotifierProvider<ScrollController>(create: (_) {
+          return _scrollController;
+        }),
+      ],
+    
+    
+   child: Scaffold(
       body: SizedBox(
         width: width,
         child: SingleChildScrollView(
           controller: _scrollController,
           child: Column(
             children: [
+              NavigationBarView(),
               HeaderView()
             ],
           ),
         ),
       )
+    ),
     );
   }
 }
