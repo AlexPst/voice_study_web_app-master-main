@@ -26,9 +26,11 @@ class HeaderView extends StatelessWidget {
 
 class HeaderDesctopView extends StatelessWidget {
    const HeaderDesctopView({super.key});
- 
+  
   @override
   Widget build(BuildContext context) {
+    
+
     final width = MediaQuery.of(context).size.width;
     final imageWidth = width * 0.47;
     final isSmall = width < 950;
@@ -48,9 +50,16 @@ class HeaderDesctopView extends StatelessWidget {
           children: [
             const SizedBox(height: 100,),   
             Align(alignment: Alignment.center,
-            child: GlassBlurContetnDesctop(size: size),),       
+            child:FlipCard(),
+            ),
+            ElevatedButton(onPressed: ()=>Transform.flip(
+              flipX: true,
+              child: FlipCard()), 
+              child: Text('ElevatedButton'),style: ButtonStyle(shadowColor: MaterialStateProperty.all(Colors.red),
+                ),),
+            //child: GlassBlurContetnDesctop(size: size),),       
             Align(alignment: Alignment(0.6, 0.0),
-            child: PersonPic(),
+            //child: PersonPic(),
             ),
            
             ]     
@@ -60,6 +69,7 @@ class HeaderDesctopView extends StatelessWidget {
 
 }
 
+  
 
 class HeaderMobileView extends StatelessWidget {
    HeaderMobileView({super.key});
@@ -147,6 +157,23 @@ class PersonPic extends StatelessWidget {
   }
 }
 
+
+class FlipCard extends StatelessWidget {
+  const FlipCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(image: AssetImage('lib/images/tarocard_01.png'),
+        fit: BoxFit.cover
+        ),
+        
+      ),
+
+    );
+  }
+}
 
 
 
